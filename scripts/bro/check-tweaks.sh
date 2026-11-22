@@ -52,6 +52,7 @@ check $B/src/components/window/CliControlPill.tsx 'Object.values(s.tabs).include
 check apps/cli/ardia_cli/browse/state.py 'async def announce_target'
 check apps/cli/ardia_cli/browse/tabs.py 'async def wake_app_tab'
 check apps/cli/ardia_cli/browse/capture.py '@command("frames")'
+check apps/cli/ardia_cli/browse/commands.py 'async def go_offscreen'
 check apps/browser/src/lib/sidebarMetrics.ts 'inset: 3, gap: 3'
 check apps/browser/src/components/sidebar/tokens.ts '=> true;'
 check apps/browser/src/lib/sidebarMetrics.ts 'SIDEBAR_GROUP_ROW = { height: 28 }'
