@@ -27,7 +27,7 @@ if [ -d "$dest" ]; then
   osascript -e "tell application \"Finder\" to delete (POSIX file \"$dest\")" >/dev/null 2>&1
 fi
 [ -e "$dest" ] && { echo "Couldn't move the old $name.app to the Trash; not installing."; exit 1; }
-ditto "$app" "$dest" && codesign -v "$dest" || { echo "Install failed."; exit 1; }
+ditto "$app" "$dest" && scripts/bro/adhoc-sign.sh "$dest" >/dev/null && codesign -v "$dest" || { echo "Install failed."; exit 1; }  # ad hoc: never expires
 # The build product has the same app id as the installed Bro; left registered, macOS can show its icon (an older
 # one, from the icon cache) for Bro in the Dock. Unregister it and register only the installed app.
 lsregister=/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister

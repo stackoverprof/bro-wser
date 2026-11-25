@@ -40,23 +40,7 @@ staging=$(mktemp -d)
 trap 'rm -rf "$staging"' EXIT
 
 ditto "$app" "$staging/Bro-wser.app"
-# Ad hoc, keeping each part's entitlements (Chromium's helpers need theirs). No hardened runtime: with an ad hoc
-# signature it would refuse to load the app's own frameworks.
-# The development build carries Erbin's provisioning profile (his name and certificate) and entitlements tied to his
-# team (app id, keychain groups), which an ad hoc app can't launch with. Drop them; keep the device and privacy ones.
-rm -f "$staging/Bro-wser.app/Contents/embedded.provisionprofile"
-codesign --force --deep --sign - --preserve-metadata=entitlements "$staging/Bro-wser.app"
-ents="$staging/main.entitlements"
-codesign -d --entitlements :- "$staging/Bro-wser.app" 2>/dev/null > "$ents"
-for key in com.apple.application-identifier com.apple.developer.team-identifier keychain-access-groups com.apple.security.get-task-allow; do
-  /usr/libexec/PlistBuddy -c "Delete :$key" "$ents" 2>/dev/null || true
-done
-codesign --force --sign - --entitlements "$ents" "$staging/Bro-wser.app"
-rm -f "$ents"
-codesign --verify --deep --strict "$staging/Bro-wser.app"
-if codesign -dv "$staging/Bro-wser.app" 2>&1 | grep -q "Authority=" || [ -n "$(find "$staging/Bro-wser.app" -name '*.provisionprofile')" ]; then
-  echo "The packaged app still carries a certificate or profile; refusing to ship it."; exit 1
-fi
+scripts/bro/adhoc-sign.sh "$staging/Bro-wser.app"  # no profile, no team entitlements, no certificate
 ln -s /Applications "$staging/Applications"
 
 rm -f "$dmg"
