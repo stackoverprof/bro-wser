@@ -1,7 +1,7 @@
 import { useSettings, useTab } from "../../state/browser/hooks";
 import { useBookmarksBarMode } from "../../state/bookmarks/hooks";
 import { useShareFor } from "../../state/media/screenShare";
-import { useAddressBarInSidebar, useMinimalism } from "../../state/windows/layout";
+import { useAddressBarInSidebar } from "../../state/windows/layout";
 import { bookmarksBarShown } from "../bookmarks/BookmarksBar";
 import { useBookmarksBarHeight } from "../bookmarks/barSize";
 import { SHARE_BAR_HEIGHT } from "../media/ShareBar";
@@ -16,7 +16,7 @@ export function usePeekPageTop(windowId: string, tabId: string): number {
   const toolbar = useToolbarRow().height;
   const bookmarks = useBookmarksBarHeight();
   const sharing = !!useShareFor(tabId);
-  const minimal = useMinimalism();
+  const minimal = false; // (fork) Peek keeps its own toolbar; Minimal Tab is for the shown tab only
   const chrome = cardChrome({ addressInSidebar, small: false, minimal, split: false, fullscreen: false, hideWhileScrolling });
   return (chrome.kind === "none" ? 0 : toolbar) + (bookmarksBarShown(barMode, { url }) ? bookmarks : 0) + (sharing ? SHARE_BAR_HEIGHT : 0);
 }

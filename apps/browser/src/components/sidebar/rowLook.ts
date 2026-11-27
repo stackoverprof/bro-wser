@@ -2,7 +2,6 @@ import { createContext, useContext, useMemo } from "react";
 import { useSelectedTabGlowSetting } from "../../state/app/theme";
 import { useShortcutHint } from "../../state/commands/commandShortcuts";
 import { DEFAULT_SETTINGS } from "../../state/settings/settings";
-import { useMinimalism } from "../../state/windows/layout";
 import { useSettings } from "../../state/browser/hooks";
 import { selectedTabGlow, useTheme, type SelectedTabGlowLevel } from "../ui/theme";
 
@@ -11,7 +10,7 @@ export type SidebarRowLook = { glow: SelectedTabGlowLevel; backToPinHint: string
 export const SidebarRowLookContext = createContext<SidebarRowLook>({ glow: DEFAULT_SETTINGS.selectedTabGlow, backToPinHint: undefined, closeTabHint: undefined, quiet: false, plainTooltip: !DEFAULT_SETTINGS.showTabHoverMenu });
 
 export function useSidebarRowLookSource(): SidebarRowLook {
-  const quiet = useMinimalism();
+  const quiet = false; // (fork) Minimal Tab changes only the toolbar and the frame, never the sidebar or tab strip
   const chosenGlow = useSelectedTabGlowSetting();
   const glow = quiet ? "off" : chosenGlow;
   const backToPinHint = useShortcutHint("returnToPinnedUrl");

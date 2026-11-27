@@ -6,7 +6,6 @@ import { beginExternalDrag, endExternalDrag, moveExternalDrag } from "../../stat
 import { lightsCenter, TOP_STRIP_LIGHTS_CENTER } from "../../state/windows/dockMotion";
 import { usePagerPages } from "../../state/windows/profilePager";
 import { DownloadsButton } from "../downloads/DownloadsButton";
-import { useMinimalism } from "../../state/windows/layout";
 import { ProfileIndicator, useProfileIndicatorWidth } from "../profiles/ProfileIndicator";
 import { ClipView, ContextMenuArea, Panel, shadow, WindowDragRegion } from "../ui";
 import { layout, useTheme } from "../ui/theme";
@@ -50,7 +49,7 @@ export function TopTabStrip({ width, floating = false, hidden = false, swipe = t
   const current = useWindowProfileId();
   const { pages } = usePagerPages(windowId);
   const profileChip = useProfileIndicatorWidth(PROFILE_ROOM);
-  const minimal = useMinimalism();
+  const minimal = false; // (fork) Minimal Tab changes only the toolbar and the frame, never the sidebar or tab strip
   const controls = minimal ? 0 : (profileChip ? profileChip + CONTROLS_GAP : 0) + DOWNLOADS_BOX;
   const fullScreen = useWindowFullScreen(windowId);
   const left = floating || fullScreen ? 8 : layout.trafficLightsWidth + LIGHTS_GAP;

@@ -8,7 +8,6 @@ import { DockSelection, HoverFill, Text, withAlpha } from "../ui";
 import { GlassFill, useGlass } from "../ui/Glass";
 import { hex, useTheme } from "../ui/theme";
 import { useSelectedTopApp } from "../../state/app/theme";
-import { useMinimalism } from "../../state/windows/layout";
 import { tileLetterOf } from "../../lib/tileLetter";
 import { useSidebarTokens } from "../sidebar/tokens";
 import { ITEM_HEIGHT, PINNED_CELL, PINNED_FACE_INSET, pinnedFaceRadius, PINNED_RING_STROKE } from "./tokens";
@@ -20,7 +19,7 @@ export function PinnedFace({ tabId, active, hovered, pressed, frame = "cell" }: 
   const glass = useGlass();
   const badges = useSettings((st) => st.showTopAppBadges);
   const topApp = useSelectedTopApp();
-  const minimal = useMinimalism();
+  const minimal = false; // (fork) Minimal Tab changes only the toolbar and the frame, never the sidebar or tab strip
   const quiet = useSidebarTokens();
   if (!tab) return null;
   const glassRing = active && glass;

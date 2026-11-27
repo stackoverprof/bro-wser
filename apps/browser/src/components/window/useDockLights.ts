@@ -55,9 +55,8 @@ export function useSidebarLights(windowId: string, dock: Animated.Value, slide: 
     return () => slide.removeListener(b);
   }, [slide, o.peeking]);
   // (fork) the peeking sidebar shows no traffic lights: they belong to the toolbar it slides over
-  // (fork) In Minimalism mode it's the other way round: no toolbar, so the lights hide over the page and come out with
-  // the sidebar (docked or peeking), sliding in with it
-  const concealed = o.minimal ? !o.fullscreen && !o.peeking && !o.open : o.peeking && !o.right && !o.fullscreen;
+  // (fork) On a Minimal Tab there is no toolbar to hold them, and the sidebar stays exactly as it is, so they hide
+  const concealed = o.minimal ? !o.fullscreen : o.peeking && !o.right && !o.fullscreen;
   useEffect(() => {
     void setTrafficLightsHidden(windowId, concealed);
     return () => void setTrafficLightsHidden(windowId, false);
