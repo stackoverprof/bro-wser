@@ -71,7 +71,7 @@ export const COMMANDS = {
   toggleJavaScriptFromAppleEvents: { title: "Allow JavaScript from Apple Events", toggles: "allowJavaScriptFromAppleEvents" },
   toggleAddressBar: { title: "Show Address Bar in Sidebar", ...offInLittleArdia },
   // (fork) Minimal Tab, per tab, in place of Ardia's browser-wide Minimalism Mode
-  toggleMinimalism: { title: "Minimal Tab", barTitle: "Toggle Minimal Tab", symbol: "rectangle.leftthird.inset.filled", keys: ["⌃⌘M"], ...offInLittleArdia },
+  toggleMinimalism: { title: "Minimal Tab", barTitle: "Toggle Minimal Tab", symbol: "rectangle.leftthird.inset.filled", keys: ["⌃⌘M"], scope: "page", onInternalPages: true, littleArdia: "off" },
   cast: { title: "Cast…", littleArdia: "page" },
   zoomReset: { title: "Zoom to Actual Size", barTitle: "Actual Size", symbol: "1.magnifyingglass", keys: ["⌘0"], ...pageInLittleArdia },
   zoomIn: { title: "Zoom In", symbol: "plus.magnifyingglass", keys: ["⌘+", "⌘="], ...pageInLittleArdia },
