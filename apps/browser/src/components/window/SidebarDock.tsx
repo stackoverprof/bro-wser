@@ -61,7 +61,7 @@ import { useTabDrag } from "../../state/drag/tabDrag";
 import { usePeek } from "./usePeek";
 import { useEmptyWindowPeek } from "./useEmptyWindowPeek";
 import { useSidebarLights, useTopStripLights } from "./useDockLights";
-import { useCardFrame } from "./cardFrame";
+import { useCardFrame, useSidebarCardFrame } from "./cardFrame";
 import { forgetSidebarDock, noteSidebarDock } from "./sidebarDockCheck";
 
 // (fork) wash under the sidebar, over the window frame's material
@@ -255,7 +255,7 @@ function SidebarDock({
   const band = draggingTab ? TAB_DRAG_EDGE_STRIP : PEEK_EDGE_STRIP;
   const latestReveal = useRef({ state, right, windowWidth, band, reveal });
   latestReveal.current = { state, right, windowWidth, band, reveal };
-  const frame = useCardFrame();
+  const frame = useSidebarCardFrame(); // (fork) the peeking sidebar keeps its frame on a Minimal Tab
   const peekAt = frame.peek;
   const holdWidth = peekHoldWidth(width, peekAt.left);
   const peeking = peekOnScreen(state);

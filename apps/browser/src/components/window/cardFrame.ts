@@ -1,5 +1,5 @@
 import { pageFrameOf, type PageFrame } from "../../lib/windowLayout";
-import { drawnWindowCornerRadius, usePageFrameInset, windowCornerRadius } from "../../state/windows/layout";
+import { drawnWindowCornerRadius, usePageFrameInset, useSidebarFrameInset, windowCornerRadius } from "../../state/windows/layout";
 import { perLook } from "../ui/tokens";
 import { peekRadius } from "./tokens";
 import { sidebarCardGap } from "./dockMotion";
@@ -20,4 +20,10 @@ export function cardFrameOf(inset: number, scale = currentInterfaceScale()): Car
 export function useCardFrame(): CardFrame {
   const scale = useCurrentInterfaceScale();
   return cardFrameOf(usePageFrameInset(), scale);
+}
+
+// (fork) for the sidebar, which keeps its frame on a Minimal Tab
+export function useSidebarCardFrame(): CardFrame {
+  const scale = useCurrentInterfaceScale();
+  return cardFrameOf(useSidebarFrameInset(), scale);
 }

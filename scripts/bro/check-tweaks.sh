@@ -65,6 +65,7 @@ check packages/shell/ios/AppUpdater.swift 'github.com/stackoverprof/bro-wser'
 check apps/browser/src/components/toolbar/Toolbar.tsx 'showToolbarMenu(tab, { inSplit, tabsShown })'
 check apps/browser/src/components/window/useDockLights.ts 'On a Minimal Tab there is no toolbar to hold them'
 check apps/browser/src/components/tabstrip/PinnedFace.tsx 'Minimal Tab changes only the toolbar and the frame'
+check apps/browser/src/components/window/SidebarDock.tsx 'the peeking sidebar keeps its frame on a Minimal Tab'
 check apps/browser/src/state/windows/layout.ts "browser-wide Minimalism with Minimal Tab"
 check apps/browser/src/state/commands/commands.ts 'case "toggleMinimalism": // (fork) Minimal Tab'
 check apps/browser/src/state/sidebar/tabMenu.ts 'id: "minimalTab"'

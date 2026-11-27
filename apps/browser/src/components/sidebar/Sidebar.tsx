@@ -7,7 +7,7 @@ import { TintInk } from "../ui/TintInk";
 import { useTabLayout, useTabsShown, useWindowFullScreen, useWindowId, useWindowProfileId } from "../../state/browser/hooks";
 import { QuietLightDots } from "../window/QuietLightDots";
 import { useHasDownloads, useNoTiles } from "../../state/sidebar/hooks";
-import { collapsedSidebarHeader, useAddressBarInSidebar, usePageFrameInset, useSidebarCaptionRoom, useSidebarHeaderCollapsed, useToolbarLightsCenter } from "../../state/windows/layout";
+import { collapsedSidebarHeader, useAddressBarInSidebar, useSidebarFrameInset, useSidebarCaptionRoom, useSidebarHeaderCollapsed, useToolbarLightsCenter } from "../../state/windows/layout";
 import { closeAnchoredWhenControlsRowChanges } from "../../state/sidebar/controlsRowChange";
 import { DownloadsButton } from "../downloads/DownloadsButton";
 import { PROFILE_INDICATOR_X } from "../profiles/ProfileIndicator";
@@ -53,7 +53,7 @@ export function Sidebar({ width }: { width: number }) {
   const field = useSidebarField();
   const captionRoom = useSidebarCaptionRoom();
   const collapsed = useSidebarHeaderCollapsed();
-  const frame = usePageFrameInset();
+  const frame = useSidebarFrameInset(); // (fork) unchanged on a Minimal Tab
   const header = collapsed && field !== "top" ? collapsedSidebarHeader(frame) : sidebarHeaderOf(addressBar, lightsY, field === "top");
   const downloadsShown = useSidebarPart("downloads");
   const hasDownloads = useHasDownloads(windowId) && downloadsShown;

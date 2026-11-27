@@ -90,6 +90,20 @@ export function usePageFrameInset(): number {
   );
 }
 
+// (fork) The sidebar keeps the frame it has outside Minimal Tab: only the page goes edge to edge.
+export function useSidebarFrameInset(): number {
+  const windowId = useWindowId();
+  return useWindowSettings(windowId, (s) =>
+    pageFrameInsetOf(s.settings.pageFrame, {
+      borderlessMode: s.settings.borderlessMode,
+      zeroInFullScreen: s.settings.pageFrameZeroInFullScreen,
+      fullScreen: !!s.windows[windowId]?.fullScreen,
+      zeroWhenTabsHidden: s.settings.pageFrameZeroWhenTabsHidden,
+      tabsHidden: autoHidesTabsIn(s, windowId),
+    }),
+  );
+}
+
 export const pageFrameIn = (s: BrowserState, windowId: string): number =>
   pageFrameInsetOf(s.settings.pageFrame, {
     borderlessMode: s.settings.borderlessMode || minimalismIn(s, windowId),

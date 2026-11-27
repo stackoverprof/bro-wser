@@ -19,7 +19,7 @@ import { PinnedGrid } from "./PinnedGrid";
 import { pinGridHeight } from "./pinZone";
 import { SCROLL_EDGE, ScrollEdgeLine, useScrollEdge, useScrollEdgeBelow } from "./ScrollEdge";
 import { listTopGap, sidebarHeaderOf, toolbarEdgeLift } from "./geometry";
-import { useAddressBarInSidebar, usePageFrameInset, useToolbarLightsCenter } from "../../state/windows/layout";
+import { useAddressBarInSidebar, useSidebarFrameInset, useToolbarLightsCenter } from "../../state/windows/layout";
 import { useToolbarRow } from "../toolbar/useToolbarRow";
 import { startsOffScreen } from "../../state/sidebar/geometry";
 import { toggleNewTabBar } from "../../state/omnibox/newTabBar";
@@ -261,7 +261,7 @@ export const SidebarPage = memo(function SidebarPage({ profileId, slot, paging, 
 function useToolbarEdgeLift(besideToolbar: boolean): number {
   const addressInSidebar = useAddressBarInSidebar();
   const lightsY = useToolbarLightsCenter()[1];
-  const frame = usePageFrameInset();
+  const frame = useSidebarFrameInset(); // (fork) unchanged on a Minimal Tab
   const row = useToolbarRow();
   return besideToolbar && !addressInSidebar ? toolbarEdgeLift(sidebarHeaderOf(false, lightsY), frame, row) : 0;
 }
