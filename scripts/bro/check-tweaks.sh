@@ -64,6 +64,9 @@ check apps/browser/src/components/toolbar/Toolbar.tsx 'domain sits in a soft rou
 check packages/shell/ios/AppUpdater.swift 'github.com/stackoverprof/bro-wser'
 check apps/browser/src/components/toolbar/Toolbar.tsx 'showToolbarMenu(tab, { inSplit, tabsShown })'
 check apps/browser/src/components/window/useDockLights.ts 'In Minimalism mode it'
+check apps/browser/src/state/windows/layout.ts "browser-wide Minimalism with Minimal Tab"
+check apps/browser/src/state/commands/commands.ts 'case "toggleMinimalism": // (fork) Minimal Tab'
+check apps/browser/src/state/sidebar/tabMenu.ts 'id: "minimalTab"'
 check apps/browser/macos/Ardia-macOS/Info.plist '$(BRO_APP_NAME)'
 check apps/browser/src/components/toolbar/Toolbar.tsx 'HAIRLINE_OPACITY = 0.12'
 check apps/browser/src/components/toolbar/NavButtons.tsx 'CIRCLE_LIFT'

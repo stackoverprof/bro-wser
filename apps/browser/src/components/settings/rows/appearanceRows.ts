@@ -114,12 +114,7 @@ export const appearanceRows = {
           description: "Show on hover hides them until you point at the address bar.",
           keywords: ["hover", "always show", "always visible", "site controls", "split view", "bookmark", "copy url", "buttons", "icons", "extensions", "pinned extensions", "clean", "arc", "url bar", "location bar"],
         },
-        minimalismMode: {
-          title: "Minimalism mode",
-          explained: true,
-          description: `Just tabs and the page, no toolbar. ${keyText("⌃⌘M")} toggles it.`,
-          keywords: ["minimal", "minimalism", "minimalist", "clean", "compact", "zen", "simple", "distraction free", "no toolbar", "hide toolbar", "search browser", "quiet", "focus"],
-        },
+        // (fork) no Minimalism Mode row: Bro has Minimal Tab instead
         bookmarksBar: {
           title: "Bookmarks bar",
           description: `Below the toolbar. ${keyText("⇧⌘B")} toggles it.`,

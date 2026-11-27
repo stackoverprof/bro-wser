@@ -68,6 +68,7 @@ export type Tab = {
   lastActiveAt: number;
   restoredAt?: number;
   unseen?: true;
+  minimal?: true; // (fork) Minimal Tab: while this tab is shown, its window hides the toolbar and the page frame
 };
 
 export type AdoptKind = "restore" | "clone" | "tab" | "ardiacore" | "webkit" | "link";

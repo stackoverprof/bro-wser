@@ -154,7 +154,7 @@ enum CommandTable {
     "toggleFullUrl": "Show Full URL",
     "toggleJavaScriptFromAppleEvents": "Allow JavaScript from Apple Events",
     "toggleAddressBar": "Show Address Bar in Sidebar",
-    "toggleMinimalism": "Minimalism Mode",
+    "toggleMinimalism": "Minimal Tab",
     "cast": "Cast…",
     "zoomReset": "Zoom to Actual Size",
     "zoomIn": "Zoom In",

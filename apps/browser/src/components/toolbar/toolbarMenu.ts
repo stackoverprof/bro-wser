@@ -53,7 +53,7 @@ export async function showToolbarMenu(tab: MenuTab, o: { inSplit: boolean; tabsS
       : [item("openSplit", "Open Split View", "rectangle.split.2x1", "openSplitPane")],
     [
       item("toggleSidebar", o.tabsShown ? "Hide Tabs" : "Show Tabs", "sidebar.left", "toggleSidebar"),
-      { ...item("toggleMinimalism", "Minimalism Mode", undefined, "toggleMinimalism"), checked: minimalismIn(s, tab.windowId) },
+      { ...item("toggleMinimalism", "Minimal Tab", undefined, "toggleMinimalism"), checked: minimalismIn(s, tab.windowId) },
       item("inspectElements", "Inspect Elements", "magnifyingglass", "inspectElements"),
     ],
   );

@@ -205,6 +205,7 @@ export function tabMenuItems(s: BrowserState, windowId: string, tab: Tab, f: Fac
       ...(tab.customTitle ? [{ id: "resetName", title: "Reset Name" }] : []),
       { id: "icon", title: "Change Icon…", symbol: "photo" },
       ...(tab.customIcon ? [{ id: "resetIcon", title: "Reset Icon" }] : []),
+      { id: "minimalTab", title: "Minimal Tab", symbol: "rectangle.leftthird.inset.filled", checked: !!tab.minimal }, // (fork)
       ...muteItems(s, tab),
       ...pictureInPictureItems(tab),
       ...unreadItems(s, tab),
@@ -255,6 +256,7 @@ function runTabChoice(windowId: string, tab: Tab, f: Facts, choice: string | Des
   else if (choice === "resetName") s.updateTab(tab.id, { customTitle: null });
   else if (choice === "icon") void openIconPicker(windowId, t);
   else if (choice === "resetIcon") s.updateTab(tab.id, { customIcon: null });
+  else if (choice === "minimalTab") s.updateTab(tab.id, { minimal: tab.minimal ? undefined : true }); // (fork)
   else if (choice === "pin") s.togglePin(tab.id);
   else if (choice === "unpinMember") s.placeTabs([tab.id], { pinned: false, groupId: null });
   else if (choice === "pinTile") s.pinTabs([tab.id], true, false);

@@ -243,6 +243,8 @@ export function runCommand({ command, arg, windowId: given }: CommandEvent, { st
       return focusSplitPane(windowId, command === "focusNextPane" ? 1 : -1);
     case "toggleSidebar":
       return s.toggleSidebar(windowId);
+    case "toggleMinimalism": // (fork) Minimal Tab
+      return tab ? s.updateTab(tab.id, { minimal: tab.minimal ? undefined : true }) : undefined;
     case "zoomIn":
       return page ? void web?.zoomStep(1) : undefined;
     case "zoomOut":

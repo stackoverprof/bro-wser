@@ -199,7 +199,7 @@ function ToolbarSection() {
         <Row anchor="appearance.addressBarButtons">
           <PopUp value={buttons} options={ADDRESS_BAR_BUTTONS} onChange={(v) => updateSettings({ addressBarButtons: v })} minWidth={160} />
         </Row>
-        <SettingToggle anchor="appearance.minimalismMode" />
+        {/* (fork) no Minimalism Mode: Bro has Minimal Tab instead (⌃⌘M, or the toolbar's right-click menu) */}
         <BookmarksBarRow />
       </Group>
     </>
