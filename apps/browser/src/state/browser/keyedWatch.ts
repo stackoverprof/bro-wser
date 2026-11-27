@@ -64,6 +64,12 @@ export const watchAppDark = fieldWatch(browser, (s: BrowserState) => s.ui.appDar
 export const watchWindowSettings = keyedWatch(browser, (s: BrowserState, prev: BrowserState, wake) => {
   if (s.settings !== prev.settings) return true;
   if (s.windows !== prev.windows) for (const id of changedIds(s.windows, prev.windows)) wake(id);
+  // (fork) Minimal Tab lives on the tab but changes its window's layout (toolbar, frame): wake that window at once
+  if (s.tabs !== prev.tabs)
+    for (const id of changedIds(s.tabs, prev.tabs)) {
+      const t = s.tabs[id] ?? prev.tabs[id];
+      if (t && !!s.tabs[id]?.minimal !== !!prev.tabs[id]?.minimal) wake(t.windowId);
+    }
 });
 export const useWindowSettings = <T,>(windowId: string, read: (s: BrowserState) => T): T => useKeyed(watchWindowSettings, windowId, () => read(useBrowser.getState()));
 export const ALL = "";
