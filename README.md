@@ -32,7 +32,7 @@ Each Bro-wser release is built from an Ardia release: Bro-wser 0.2.47 is Ardia 0
 - **No address field.** The toolbar shows only the site's domain, centred, in a soft shade of the page's colour.
   Hover it and it sits in a small pill; click it to open the command bar, click again to close it.
 - **Only back, forward and reload**, on the right before your extensions. Everything else (Reader, Translate,
-  Site Controls, Split View, zoom, bookmark, share, Show Tabs, Minimal Tab) is in the toolbar's right-click menu.
+  Site Controls, Split View, zoom, bookmark, share, Show Tabs, Focus Mode) is in the toolbar's right-click menu.
 - **A loading pill** takes the domain's place while a page loads, instead of a bar along the bottom edge.
 - **Quiet traffic lights.** Grey dots at rest, the real coloured buttons when you hover the corner.
 
@@ -47,10 +47,10 @@ Each Bro-wser release is built from an Ardia release: Bro-wser 0.2.47 is Ardia 0
 - **Downloads and the profile name live in the footer**, with the profile dots.
 - **A darker ground** for the sliding sidebar, so it reads apart from the page.
 
-### Minimal Tab (⌃⌘M)
+### Focus Mode (⌃⌘M)
 - Instead of Ardia's browser-wide Minimalism, mark just the tabs you want (a slide deck, say) as Minimal, from ⌃⌘M or
   the tab's right-click menu. While one is showing, its window hides the toolbar and the frame; every other tab and
-  window stays as it is.
+  window stays as it is. It's off in split view: a split tab always keeps its toolbar and frame.
 
 ### Window
 - A lighter, more see-through frame over the desktop.

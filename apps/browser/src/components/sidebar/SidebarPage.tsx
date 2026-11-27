@@ -261,7 +261,7 @@ export const SidebarPage = memo(function SidebarPage({ profileId, slot, paging, 
 function useToolbarEdgeLift(besideToolbar: boolean): number {
   const addressInSidebar = useAddressBarInSidebar();
   const lightsY = useToolbarLightsCenter()[1];
-  const frame = useSidebarFrameInset(); // (fork) unchanged on a Minimal Tab
+  const frame = useSidebarFrameInset(); // (fork) unchanged on a Focus Mode tab
   const row = useToolbarRow();
   return besideToolbar && !addressInSidebar ? toolbarEdgeLift(sidebarHeaderOf(false, lightsY), frame, row) : 0;
 }

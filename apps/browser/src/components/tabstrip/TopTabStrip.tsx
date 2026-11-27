@@ -49,7 +49,7 @@ export function TopTabStrip({ width, floating = false, hidden = false, swipe = t
   const current = useWindowProfileId();
   const { pages } = usePagerPages(windowId);
   const profileChip = useProfileIndicatorWidth(PROFILE_ROOM);
-  const minimal = false; // (fork) Minimal Tab changes only the toolbar and the frame, never the sidebar or tab strip
+  const minimal = false; // (fork) Focus Mode changes only the toolbar and the frame, never the sidebar or tab strip
   const controls = minimal ? 0 : (profileChip ? profileChip + CONTROLS_GAP : 0) + DOWNLOADS_BOX;
   const fullScreen = useWindowFullScreen(windowId);
   const left = floating || fullScreen ? 8 : layout.trafficLightsWidth + LIGHTS_GAP;

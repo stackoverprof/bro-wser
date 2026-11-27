@@ -6,7 +6,7 @@ import { copyText } from "../../platform/clipboard";
 import { showMenu, type MenuItem } from "../../platform/menus";
 import { menuSections } from "../../state/app/menuSections";
 import { useBrowser } from "../../state/browser/store";
-import { minimalismIn } from "../../state/windows/layout";
+import { focusModeAllowed, minimalismIn } from "../../state/windows/layout";
 import { menuShortcut } from "../../state/commands/commandShortcuts";
 import { runCommand } from "../../state/commands/commands";
 import { clipboardPasteAction, pasteTarget, urlBarMenuItems } from "../../state/omnibox/paste";
@@ -53,7 +53,7 @@ export async function showToolbarMenu(tab: MenuTab, o: { inSplit: boolean; tabsS
       : [item("openSplit", "Open Split View", "rectangle.split.2x1", "openSplitPane")],
     [
       item("toggleSidebar", o.tabsShown ? "Hide Tabs" : "Show Tabs", "sidebar.left", "toggleSidebar"),
-      { ...item("toggleMinimalism", "Minimal Tab", undefined, "toggleMinimalism"), checked: minimalismIn(s, tab.windowId) },
+      { ...item("toggleMinimalism", "Focus Mode", undefined, "toggleMinimalism"), checked: minimalismIn(s, tab.windowId), enabled: focusModeAllowed(s, tab.id) },
       item("inspectElements", "Inspect Elements", "magnifyingglass", "inspectElements"),
     ],
   );

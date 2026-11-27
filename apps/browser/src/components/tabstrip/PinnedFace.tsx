@@ -19,7 +19,7 @@ export function PinnedFace({ tabId, active, hovered, pressed, frame = "cell" }: 
   const glass = useGlass();
   const badges = useSettings((st) => st.showTopAppBadges);
   const topApp = useSelectedTopApp();
-  const minimal = false; // (fork) Minimal Tab changes only the toolbar and the frame, never the sidebar or tab strip
+  const minimal = false; // (fork) Focus Mode changes only the toolbar and the frame, never the sidebar or tab strip
   const quiet = useSidebarTokens();
   if (!tab) return null;
   const glassRing = active && glass;

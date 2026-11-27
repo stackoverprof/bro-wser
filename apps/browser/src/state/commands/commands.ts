@@ -31,7 +31,7 @@ import { focusSettingsSearch } from "../settings/searchState";
 import { closePanelToHeroBar, focusHeroBar } from "../omnibox/barState";
 import { closeNewTabBar, isEmptyCardTab, showNewTabBar, toggleNewTabBar } from "../omnibox/newTabBar";
 import { NEW_TAB_BAR_POLICY } from "../omnibox/newTabBarPolicy";
-import { addressBarInSidebar } from "../windows/layout";
+import { addressBarInSidebar, focusModeAllowed } from "../windows/layout";
 import { commandKeyPlacement } from "../omnibox/barPlacement";
 import { addFolderToSidebar, restoreArcFolders } from "../bookmarks/bookmarkGroups";
 import { withLivePage } from "../tabs/livePage";
@@ -243,8 +243,8 @@ export function runCommand({ command, arg, windowId: given }: CommandEvent, { st
       return focusSplitPane(windowId, command === "focusNextPane" ? 1 : -1);
     case "toggleSidebar":
       return s.toggleSidebar(windowId);
-    case "toggleMinimalism": // (fork) Minimal Tab
-      return tab ? s.updateTab(tab.id, { minimal: tab.minimal ? undefined : true }) : undefined;
+    case "toggleMinimalism": // (fork) Focus Mode, never in split view
+      return tab && (tab.minimal || focusModeAllowed(s, tab.id)) ? s.updateTab(tab.id, { minimal: tab.minimal ? undefined : true }) : undefined;
     case "zoomIn":
       return page ? void web?.zoomStep(1) : undefined;
     case "zoomOut":

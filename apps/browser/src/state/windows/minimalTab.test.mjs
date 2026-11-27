@@ -1,7 +1,7 @@
-// (fork) Minimal Tab: the window's layout follows its shown tab's flag, and window-keyed hooks hear the flip at once.
+// (fork) Focus Mode: the window's layout follows its shown tab's flag, and window-keyed hooks hear the flip at once.
 import assert from "node:assert/strict";
 import { test } from "node:test";
-const { minimalismIn, pageFrameIn } = await import("./layout.ts");
+const { focusModeAllowed, minimalismIn, pageFrameIn } = await import("./layout.ts");
 const { useBrowser } = await import("../browser/store.ts");
 const { watchWindowSettings } = await import("../browser/keyedWatch.ts");
 
@@ -11,6 +11,7 @@ function seed(minimal) {
   useBrowser.setState({
     windows: { w: { id: "w", kind: "main", profileId: "p", tabIds: ["a", "b"], activeTabIds: { p: "a" }, frame: null, createdAt: 0 } },
     tabs: { a: tab("a", minimal ? { minimal: true } : {}), b: tab("b") },
+    splits: {},
     settings: { ...s.settings, pageFrame: 8, borderlessMode: false },
   });
 }
@@ -38,5 +39,21 @@ test("flipping a tab's flag wakes its window's watchers right away", () => {
   assert.equal(woken, 2);
   useBrowser.setState({ tabs: { ...useBrowser.getState().tabs, b: { ...t.b, title: "x" } } });
   assert.equal(woken, 2, "other tab changes don't wake it");
+  stop();
+});
+
+test("Focus Mode is never on in split view, and the split change wakes the window", () => {
+  seed(true);
+  let woken = 0;
+  const stop = watchWindowSettings("w", () => woken++);
+  assert.equal(focusModeAllowed(useBrowser.getState(), "a"), true);
+  useBrowser.setState({ splits: { v: { id: "v", slots: [{ tabId: "a" }, { tabId: "b" }] } } });
+  const s = useBrowser.getState();
+  assert.ok(woken >= 1);
+  assert.equal(minimalismIn(s, "w"), false);
+  assert.ok(pageFrameIn(s, "w") > 0);
+  assert.equal(focusModeAllowed(s, "a"), false);
+  useBrowser.setState({ splits: {} });
+  assert.equal(minimalismIn(useBrowser.getState(), "w"), true, "back on once the split is gone");
   stop();
 });

@@ -255,7 +255,7 @@ function SidebarDock({
   const band = draggingTab ? TAB_DRAG_EDGE_STRIP : PEEK_EDGE_STRIP;
   const latestReveal = useRef({ state, right, windowWidth, band, reveal });
   latestReveal.current = { state, right, windowWidth, band, reveal };
-  const frame = useSidebarCardFrame(); // (fork) the peeking sidebar keeps its frame on a Minimal Tab
+  const frame = useSidebarCardFrame(); // (fork) the peeking sidebar keeps its frame on a Focus Mode tab
   const peekAt = frame.peek;
   const holdWidth = peekHoldWidth(width, peekAt.left);
   const peeking = peekOnScreen(state);

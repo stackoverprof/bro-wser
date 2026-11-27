@@ -10,7 +10,7 @@ export type SidebarRowLook = { glow: SelectedTabGlowLevel; backToPinHint: string
 export const SidebarRowLookContext = createContext<SidebarRowLook>({ glow: DEFAULT_SETTINGS.selectedTabGlow, backToPinHint: undefined, closeTabHint: undefined, quiet: false, plainTooltip: !DEFAULT_SETTINGS.showTabHoverMenu });
 
 export function useSidebarRowLookSource(): SidebarRowLook {
-  const quiet = false; // (fork) Minimal Tab changes only the toolbar and the frame, never the sidebar or tab strip
+  const quiet = false; // (fork) Focus Mode changes only the toolbar and the frame, never the sidebar or tab strip
   const chosenGlow = useSelectedTabGlowSetting();
   const glow = quiet ? "off" : chosenGlow;
   const backToPinHint = useShortcutHint("returnToPinnedUrl");

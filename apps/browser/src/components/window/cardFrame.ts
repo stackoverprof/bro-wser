@@ -22,7 +22,7 @@ export function useCardFrame(): CardFrame {
   return cardFrameOf(usePageFrameInset(), scale);
 }
 
-// (fork) for the sidebar, which keeps its frame on a Minimal Tab
+// (fork) for the sidebar, which keeps its frame on a Focus Mode tab
 export function useSidebarCardFrame(): CardFrame {
   const scale = useCurrentInterfaceScale();
   return cardFrameOf(useSidebarFrameInset(), scale);

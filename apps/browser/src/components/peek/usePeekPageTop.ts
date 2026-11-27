@@ -16,7 +16,7 @@ export function usePeekPageTop(windowId: string, tabId: string): number {
   const toolbar = useToolbarRow().height;
   const bookmarks = useBookmarksBarHeight();
   const sharing = !!useShareFor(tabId);
-  const minimal = false; // (fork) Peek keeps its own toolbar; Minimal Tab is for the shown tab only
+  const minimal = false; // (fork) Peek keeps its own toolbar; Focus Mode is for the shown tab only
   const chrome = cardChrome({ addressInSidebar, small: false, minimal, split: false, fullscreen: false, hideWhileScrolling });
   return (chrome.kind === "none" ? 0 : toolbar) + (bookmarksBarShown(barMode, { url }) ? bookmarks : 0) + (sharing ? SHARE_BAR_HEIGHT : 0);
 }

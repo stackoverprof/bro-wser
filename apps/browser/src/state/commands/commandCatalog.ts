@@ -70,8 +70,8 @@ export const COMMANDS = {
   toggleFullUrl: { title: "Show Full URL", symbol: "text.alignleft", toggles: "showFullUrl" },
   toggleJavaScriptFromAppleEvents: { title: "Allow JavaScript from Apple Events", toggles: "allowJavaScriptFromAppleEvents" },
   toggleAddressBar: { title: "Show Address Bar in Sidebar", ...offInLittleArdia },
-  // (fork) Minimal Tab, per tab, in place of Ardia's browser-wide Minimalism Mode
-  toggleMinimalism: { title: "Minimal Tab", barTitle: "Toggle Minimal Tab", symbol: "rectangle.leftthird.inset.filled", keys: ["⌃⌘M"], scope: "page", onInternalPages: true, littleArdia: "off" },
+  // (fork) Focus Mode, per tab, in place of Ardia's browser-wide Minimalism Mode
+  toggleMinimalism: { title: "Focus Mode", barTitle: "Toggle Focus Mode", symbol: "rectangle.leftthird.inset.filled", keys: ["⌃⌘M"], scope: "page", onInternalPages: true, littleArdia: "off" },
   cast: { title: "Cast…", littleArdia: "page" },
   zoomReset: { title: "Zoom to Actual Size", barTitle: "Actual Size", symbol: "1.magnifyingglass", keys: ["⌘0"], ...pageInLittleArdia },
   zoomIn: { title: "Zoom In", symbol: "plus.magnifyingglass", keys: ["⌘+", "⌘="], ...pageInLittleArdia },

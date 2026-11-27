@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { activeTab, autoHidesTabsIn, sidebarSideOf, tabLayoutOf, tabsShownIn } from "../browser/model";
 import { switchOn } from "../../platform/killSwitches";
+import { splitOf } from "../splits/splits";
 import { ARC_LIGHTS_CENTER, lightsCenter, sidebarLightsCenter, toolbarLightsCenter, TOP_STRIP_LIGHTS_CENTER } from "./dockMotion";
 import { frameCornerRadius, windowFrame, type LightsPlace } from "../../platform/windows";
 import { rootSizeOfFrame } from "../settings/interfaceScale";
@@ -30,12 +31,17 @@ export function useTabLayout(): "sidebar" | "top" {
   return useWindowSettings(windowId, (s) => tabLayoutOf(s, windowId));
 }
 
-// (fork) Bro replaces Ardia's browser-wide Minimalism with Minimal Tab: on while the window shows a tab marked minimal,
+// (fork) Bro replaces Ardia's browser-wide Minimalism with Focus Mode: on while the window shows a tab marked minimal,
 // and all it does is hide the toolbar and the page frame. Nothing else moves (no address field in the sidebar).
+// Never in split view: a split tab shows its toolbar and frame even if it was marked before joining the split.
 export const minimalismIn = (s: BrowserState, windowId: string): boolean => {
   const w = s.windows[windowId];
-  return !!w && w.kind !== "small" && !!w.activeTabIds && !!activeTab(s, windowId)?.minimal;
+  if (!w || w.kind === "small" || !w.activeTabIds) return false;
+  const tab = activeTab(s, windowId);
+  return !!tab?.minimal && !splitOf(s, tab.id);
 };
+
+export const focusModeAllowed = (s: BrowserState, tabId: string): boolean => !splitOf(s, tabId); // (fork)
 
 export const useMinimalism = (): boolean => {
   const windowId = useWindowId();
@@ -43,13 +49,13 @@ export const useMinimalism = (): boolean => {
 };
 
 export const sidebarAddressChosen = (settings: Pick<BrowserState["settings"], "addressBar" | "minimalismMode">): boolean =>
-  settings.addressBar === "sidebar"; // (fork) Minimal Tab doesn't move the address field
+  settings.addressBar === "sidebar"; // (fork) Focus Mode doesn't move the address field
 
 export function addressBarInSidebar(s: BrowserState, windowId: string): boolean {
   const w = s.windows[windowId];
   return (
     !!w &&
-    s.settings.addressBar === "sidebar" && // (fork) not for Minimal Tab
+    s.settings.addressBar === "sidebar" && // (fork) not for Focus Mode
     (tabsShownIn(s, windowId) || switchOn("sidebarSlide")) &&
     tabLayoutOf(s, w.id) === "sidebar"
   );
@@ -90,7 +96,7 @@ export function usePageFrameInset(): number {
   );
 }
 
-// (fork) The sidebar keeps the frame it has outside Minimal Tab: only the page goes edge to edge.
+// (fork) The sidebar keeps the frame it has outside Focus Mode: only the page goes edge to edge.
 export function useSidebarFrameInset(): number {
   const windowId = useWindowId();
   return useWindowSettings(windowId, (s) =>

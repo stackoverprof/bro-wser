@@ -63,8 +63,9 @@ export const watchSettings = fieldWatch(browser, (s: BrowserState) => s.settings
 export const watchAppDark = fieldWatch(browser, (s: BrowserState) => s.ui.appDark);
 export const watchWindowSettings = keyedWatch(browser, (s: BrowserState, prev: BrowserState, wake) => {
   if (s.settings !== prev.settings) return true;
+  if (s.splits !== prev.splits) return true; // (fork) Focus Mode is off in split view
   if (s.windows !== prev.windows) for (const id of changedIds(s.windows, prev.windows)) wake(id);
-  // (fork) Minimal Tab lives on the tab but changes its window's layout (toolbar, frame): wake that window at once
+  // (fork) Focus Mode lives on the tab but changes its window's layout (toolbar, frame): wake that window at once
   if (s.tabs !== prev.tabs)
     for (const id of changedIds(s.tabs, prev.tabs)) {
       const t = s.tabs[id] ?? prev.tabs[id];

@@ -53,7 +53,7 @@ export function Sidebar({ width }: { width: number }) {
   const field = useSidebarField();
   const captionRoom = useSidebarCaptionRoom();
   const collapsed = useSidebarHeaderCollapsed();
-  const frame = useSidebarFrameInset(); // (fork) unchanged on a Minimal Tab
+  const frame = useSidebarFrameInset(); // (fork) unchanged on a Focus Mode tab
   const header = collapsed && field !== "top" ? collapsedSidebarHeader(frame) : sidebarHeaderOf(addressBar, lightsY, field === "top");
   const downloadsShown = useSidebarPart("downloads");
   const hasDownloads = useHasDownloads(windowId) && downloadsShown;
