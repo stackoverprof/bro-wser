@@ -18,7 +18,9 @@ NSSet<NSString *> *ReservedIdentifiers() {
     @"ardia.command.newWindow", @"ardia.command.reopenClosedTab", @"ardia.command.nextTab", @"ardia.command.previousTab",
     @"ardia.command.nextProfile", @"ardia.command.previousProfile",
     @"ardia.command.tabSwitcher", kQuitIdentifier, kCopyUrlIdentifier, @"ardia.command.devTools", @"ardia.command.toggleDevTools",
-    @"ardia.command.searchTabs"
+    @"ardia.command.searchTabs",
+    // (fork) Minimal Tab beats the page, so editors like Google Sheets can't swallow its shortcut.
+    @"ardia.command.toggleMinimalism"
   ]];
   return reserved;
 }

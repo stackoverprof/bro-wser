@@ -78,6 +78,7 @@ check packages/shell/ios/AppWindowsModule.swift 'AsyncFunction("setTrafficLights
 check packages/shell/ios/AppWindowsModule.swift 'AsyncFunction("trafficLightsFrames")'
 check packages/shell/ios/AppWindowsModule.swift 'AsyncFunction("setTrafficLightsHidden")'
 check packages/shaders/ios/WindowTreatmentView.swift '(fork) a far more see-through window frame'
+check packages/ardiacore/ios/ArdiaReservedKeys.mm '@"ardia.command.toggleMinimalism"'
 
 if git grep -n 'preferredImageVisibility = ' -- packages/shell/ios >/dev/null 2>&1 && ! xcodebuild -version 2>/dev/null | grep -q 'Xcode 2[7-9]'; then
   echo "NOTE: upstream code uses preferredImageVisibility again; Xcode 26 can't compile it (see FORK.md, Builds with Xcode 26)"; missing=1
